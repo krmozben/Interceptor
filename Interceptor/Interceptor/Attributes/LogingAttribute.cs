@@ -12,7 +12,7 @@ namespace Interceptor.Interceptor.Attributes
             StringBuilder sbLogMessage = new StringBuilder();
 
             sbLogMessage.AppendLine(string.Format("Method Name: {0}", InterceptorContext.Instance.MethodName));
-            sbLogMessage.AppendLine(string.Format("Arguments: {0}", string.Join(",", InterceptorContext.Instance.Arguments)));
+            sbLogMessage.AppendLine(string.Format("Arguments: {0}", string.Join(",", InterceptorContext.Instance.Arguments!)));
 
             // log işlemini gerçekleştir.
             Console.WriteLine("Loging: {0}", sbLogMessage.ToString());
