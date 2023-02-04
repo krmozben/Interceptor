@@ -2,8 +2,8 @@
 
 namespace Interceptor.Interceptor.Triggers
 {
-    public interface IBeforeVoidInterceptor : IInterceptor
+    public interface IOnExceptionAspect : IInterceptor
     {
-        void OnBefore();
+        void OnException(Exception ex);
     }
 }

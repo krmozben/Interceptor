@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Interceptor.Interceptor.Attributes
 {
-    public class LogingAttribute : InterceptorBase, IBeforeVoidInterceptor, IAfterVoidInterceptor
+    public class LogingAttribute : InterceptorBase, IBeforeVoidAspect, IAfterVoidAspect
     {
         public void OnBefore()
         {

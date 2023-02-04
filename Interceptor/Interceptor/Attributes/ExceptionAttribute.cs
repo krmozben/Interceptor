@@ -3,7 +3,7 @@ using Interceptor.Interceptor.Triggers;
 
 namespace Interceptor.Interceptor.Attributes
 {
-    public class ExceptionAttribute : InterceptorBase, IOnExceptionInterceptor
+    public class ExceptionAttribute : InterceptorBase, IOnExceptionAspect
     {
         public void OnException(Exception ex)
         {

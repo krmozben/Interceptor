@@ -2,7 +2,7 @@
 
 namespace Interceptor.Interceptor.Triggers
 {
-    public interface IAfterVoidInterceptor : IInterceptor
+    public interface IAfterVoidAspect : IInterceptor
     {
         void OnAfter(object value);
     }

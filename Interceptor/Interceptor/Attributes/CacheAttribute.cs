@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace Interceptor.Interceptor.Attributes
 {
-    public class CacheAttribute : InterceptorBase, IBeforeInterceptor, IAfterVoidInterceptor
+    public class CacheAttribute : InterceptorBase, IBeforeAspect, IAfterVoidAspect
     {
         public int DurationInMinute { get; set; }
 

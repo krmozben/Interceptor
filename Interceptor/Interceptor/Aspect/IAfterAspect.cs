@@ -2,8 +2,8 @@
 
 namespace Interceptor.Interceptor.Triggers
 {
-    public interface IBeforeInterceptor : IInterceptor
+    public interface IAfterAspect : IInterceptor
     {
-        object OnBefore();
+        object OnAfter(object value);
     }
 }

@@ -2,6 +2,7 @@
 using Interceptor.Interceptor.Context;
 using Interceptor.Interceptor.Triggers;
 using System.Reflection;
+using System.Text.Json;
 
 namespace Interceptor.Proxy
 {
@@ -19,7 +20,7 @@ namespace Interceptor.Proxy
                 var realType = typeof(T);
                 var mInfo = realType.GetMethod(targetMethod.Name);
                 var Interceptors = mInfo?.GetCustomAttributes(typeof(IInterceptor), true);
-                exceptionInterceptor = Interceptors?.Where(x => x.GetType().GetInterface(nameof(IOnExceptionInterceptor)) == typeof(IOnExceptionInterceptor)).FirstOrDefault(default(object))!;
+                exceptionInterceptor = Interceptors?.Where(x => x.GetType().GetInterface(nameof(IOnExceptionAspect)) == typeof(IOnExceptionAspect)).FirstOrDefault(default(object))!;
 
                 FillAspectContext(targetMethod, args);
 
@@ -40,9 +41,9 @@ namespace Interceptor.Proxy
             catch (Exception ex)
             {
                 if (exceptionInterceptor != default(object))
-                    ((IOnExceptionInterceptor)exceptionInterceptor).OnException(ex);
+                    ((IOnExceptionAspect)exceptionInterceptor).OnException(ex);
             }
-     
+
             // TODO : burada return edilen nesnenin tip güvenli hale getirilmesi gerekli(ÖRN : Metod product nesnesi beklerken true gönderilmektedir.). Konu AOP yapısı olduğu için çözüm için bir yol aranmamıştır
 
             return returnMessage;
@@ -60,13 +61,13 @@ namespace Interceptor.Proxy
 
             foreach (IInterceptor loopAttribute in Interceptors)
             {
-                if (loopAttribute is IBeforeVoidInterceptor)
+                if (loopAttribute is IBeforeVoidAspect)
                 {
-                    ((IBeforeVoidInterceptor)loopAttribute).OnBefore();
+                    ((IBeforeVoidAspect)loopAttribute).OnBefore();
                 }
-                else if (loopAttribute is IBeforeInterceptor)
+                else if (loopAttribute is IBeforeAspect)
                 {
-                    response = ((IBeforeInterceptor)loopAttribute).OnBefore();
+                    response = ((IBeforeAspect)loopAttribute).OnBefore();
                 }
             }
         }
@@ -76,9 +77,9 @@ namespace Interceptor.Proxy
             result = default(object)!;
             foreach (IInterceptor loopAttribute in Interceptors)
             {
-                if (loopAttribute is IAfterVoidInterceptor)
+                if (loopAttribute is IAfterVoidAspect)
                 {
-                    ((IAfterVoidInterceptor)loopAttribute).OnAfter(result);
+                    ((IAfterVoidAspect)loopAttribute).OnAfter(result);
                 }
             }
         }
