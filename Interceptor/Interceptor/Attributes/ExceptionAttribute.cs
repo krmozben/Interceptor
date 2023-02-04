@@ -7,7 +7,7 @@ namespace Interceptor.Interceptor.Attributes
     {
         public void OnException(Exception ex)
         {
-            // log yazma işlemleri
+            Console.WriteLine(ex.Message);
         }
     }
 }
