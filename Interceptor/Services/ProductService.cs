@@ -11,12 +11,12 @@ namespace Interceptor.Services
     public class Product
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public double Price { get; set; }
     }
     public class ProductService : IProductService
     {
-        private Dictionary<int, Product> _InMemDb = new Dictionary<int, Product>();
+        private  Dictionary<int, Product> _InMemDb = new Dictionary<int, Product>();
 
         public ProductService()
         {

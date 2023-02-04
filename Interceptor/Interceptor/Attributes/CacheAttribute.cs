@@ -12,7 +12,7 @@ namespace Interceptor.Interceptor.Attributes
 
         public object OnBefore()
         {
-            string cacheKey = string.Format("{0}_{1}", InterceptorContext.Instance.MethodName, string.Join("_", InterceptorContext.Instance.Arguments));
+            string cacheKey = string.Format("{0}_{1}", InterceptorContext.Instance.MethodName, string.Join("_", InterceptorContext.Instance.Arguments!));
 
             if (true)
             {
@@ -20,14 +20,14 @@ namespace Interceptor.Interceptor.Attributes
                 // etmeden cache üzerinden ilgili veriyi geri dön.
 
                 Console.WriteLine("{0} isimli cache key ile cache üzerinden geliyorum!", cacheKey);
-                //return JsonSerializer.Deserialize<object>(JsonSerializer.Serialize(new Product { Name = "test" }));
-                return true;
+                return JsonSerializer.Serialize(new Product { Name = "test", Price = 5 });
+                //return true;
             }
         }
 
         public void OnAfter(object value)
         {
-            string cacheKey = string.Format("{0}_{1}", InterceptorContext.Instance.MethodName, string.Join("_", InterceptorContext.Instance.Arguments));
+            string cacheKey = string.Format("{0}_{1}", InterceptorContext.Instance.MethodName, string.Join("_", InterceptorContext.Instance.Arguments!));
 
             // cache key ile ilgili veriyi DurationInMinute kullanarak Cache'e ekle veya güncelle.
         }

@@ -30,8 +30,8 @@ namespace Interceptor.Proxy
 
                 object result;
 
-                if (response == null)
-                    returnMessage = response;
+                if (response != null)
+                    returnMessage = JsonSerializer.Deserialize(response.ToString()!, targetMethod.ReturnType)!;
                 else
                     returnMessage = targetMethod.Invoke(new T(), args)!;
 
@@ -43,8 +43,6 @@ namespace Interceptor.Proxy
                 if (exceptionInterceptor != default(object))
                     ((IOnExceptionAspect)exceptionInterceptor).OnException(ex);
             }
-
-            // TODO : burada return edilen nesnenin tip güvenli hale getirilmesi gerekli(ÖRN : Metod product nesnesi beklerken true gönderilmektedir.). Konu AOP yapısı olduğu için çözüm için bir yol aranmamıştır
 
             return returnMessage;
         }
